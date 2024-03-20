@@ -214,10 +214,14 @@ document.querySelector('.form').addEventListener("click", function (e) {
 document.addEventListener('pointerdown', clickSeti);
 
 function clickSeti(e) {
+   e.target.setPointerCapture(e.pointerId);
    e.target.style.scale = 1.5;
 
-   document.addEventListener('pointerdown', clickZoom);
+   document.addEventListener('pointerup', clickZoom);
    function clickZoom(e) {
       e.target.style.scale = 1;
+      e.target.removeEventListener('pointerdown', clickSeti);
+      e.target.removeEventListener('pointerup', clickZoom);
+
    };
 };

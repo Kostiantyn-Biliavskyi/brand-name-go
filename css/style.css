@@ -459,9 +459,11 @@ a {
 /* ------------------Services----------------------------- */
 .wraperBlockTextFoto3 {
    margin: 0 auto;
-   max-width: 1440px;
+   max-width: 1296px;
+   min-width: 300px;
    height: auto;
    margin-top: 100px;
+   border: 1px solid red;
 }
 
 .wraperWraperBlockTextFoto3 {
@@ -498,6 +500,13 @@ a {
    border: 0.5px solid rgba(78, 82, 85, 0.5);
    overflow: hidden;
    cursor: pointer;
+}
+
+@media screen and (max-width:375px) {
+   .BlockFotoItem3 {
+      width: 346px;
+      height: 346px;
+   }
 }
 
 .BlockFotoItem3:hover>.wraperBlockFoto3Text {
