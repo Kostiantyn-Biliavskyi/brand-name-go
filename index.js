@@ -50,52 +50,8 @@ var thumb = slider.querySelector('.linePoint');
 var lineSum = 0;
 var newLeft = 0;
 
-// thumb.addEventListener('mousedown', clickPoint);
 thumb.addEventListener('pointerdown', clickPoint);
-/*
-thumb.addEventListener('touchstart', xx);
-let shiftX;
-function xx(event) {
 
-   let bacgroundLine = document.querySelector('.bacgroundLine');
-   let bacgroundLineWidth1 = bacgroundLine.offsetWidth;
-   let shiftT = event.changedTouches[0].clientX;
-   let lineOnePr1 = bacgroundLineWidth1 / 100;
-   let wraperLineTextSpan = document.querySelector('.wraperLineTextSpan');
-
-
-   document.addEventListener('touchmove', onMouseMove1);
-   document.addEventListener('touchend', onMouseUp1);
-
-   function onMouseMove1(event) {
-      newLeft = event.changedTouches[0].pageX - slider.getBoundingClientRect().left;
-
-      if (newLeft < 0) {
-         newLeft = 0;
-      }
-
-      let rightEdge = slider.offsetWidth - thumb.offsetWidth;
-
-      if (newLeft > rightEdge) {
-         newLeft = rightEdge;
-      }
-
-      thumb.style.left = newLeft + 'px';
-
-      lineSum = newLeft / lineOnePr1;
-      if (lineSum >= 0) {
-         wraperLineTextSpan.textContent = Math.floor(lineSum);
-      }
-      map.style.scale = 1 + (Math.floor(lineSum) / 10);
-      bacgroundLine.style.left = -(bacgroundLineWidth1 - newLeft) + 'px';
-   }
-
-   function onMouseUp1() {
-      document.removeEventListener('touchmove', onMouseMove1);
-      document.removeEventListener('touchend', onMouseUp1);
-   }
-}
-*/
 function clickPoint(event) {
 
    thumb.setPointerCapture(event.pointerId);
@@ -105,20 +61,14 @@ function clickPoint(event) {
    let bacgroundLineWidth = bacgroundLine.offsetWidth;
    let lineOnePr = bacgroundLineWidth / 100;
    let wraperLineTextSpan = document.querySelector('.wraperLineTextSpan');
-   // alert(slider.getBoundingClientRect().left + '---' + event.clientX)
-   let shiftX = event.clientX - thumb.getBoundingClientRect().left;
 
-   // document.addEventListener('mousemove', onMouseMove);
-   // document.addEventListener('mouseup', onMouseUp);
+   // let shiftX = event.clientX - thumb.getBoundingClientRect().left;
 
    thumb.addEventListener('pointermove', onMouseMove);
    thumb.addEventListener('pointerup', onMouseUp);
 
-   // thumb.onpointermove = function (event) {
-
    function onMouseMove(event) {
 
-      // newLeft = event.clientX - shiftX - slider.getBoundingClientRect().left;
       newLeft = event.clientX - slider.getBoundingClientRect().left - (thumb.offsetWidth / 2);
 
       if (newLeft < 0) {
@@ -132,17 +82,14 @@ function clickPoint(event) {
       thumb.style.left = newLeft + 'px';
 
       lineSum = newLeft / lineOnePr;
-      // if (lineSum >= 0) {
+
       wraperLineTextSpan.textContent = Math.floor(lineSum);
-      // }
+
       map.style.scale = 1 + (Math.floor(lineSum) / 10);
       bacgroundLine.style.left = -(bacgroundLineWidth - newLeft) + 'px';
    };
 
    function onMouseUp(event) {
-      // thumb.onpointerup = function onMouseUp(event) {
-      // document.removeEventListener('mouseup', onMouseUp);
-      // document.removeEventListener('mousemove', onMouseMove);
       thumb.removeEventListener('pointermove', onMouseMove);
       thumb.removeEventListener('pointerup', onMouseUp);
       thumb.onpointermove = null;
