@@ -508,7 +508,7 @@ a {
    }
 }
 
-@media screen and (max-width:330px) {
+@media screen and (max-width:300px) {
    .BlockFotoItem3 {
       width: 300px;
       height: 300px;
@@ -550,7 +550,7 @@ a {
    z-index: 3;
 }
 
-.wraperBlockFoto3>div:hover>.BlockFoto3 {
+.BlockFotoItem3:hover>.BlockFoto3 {
    scale: 1.3;
 }
 
