@@ -158,17 +158,17 @@ document.querySelector('.form').addEventListener("click", function (e) {
    }
 });
 // -----------------------------------------------------
-document.addEventListener('pointerdown', clickSeti);
+var setiItem = document.querySelector('.setiItem');
+setiItem.addEventListener('pointerdown', clickSeti);
 
 function clickSeti(e) {
    e.target.setPointerCapture(e.pointerId);
    e.target.style.scale = 1.5;
 
-   document.addEventListener('pointerup', clickZoom);
+   setiItem.addEventListener('pointerup', clickZoom);
    function clickZoom(e) {
       e.target.style.scale = 1;
-      e.target.removeEventListener('pointerdown', clickSeti);
-      e.target.removeEventListener('pointerup', clickZoom);
-
+      setiItem.removeEventListener('pointerdown', clickSeti);
+      setiItem.removeEventListener('pointerup', clickZoom);
    };
 };
