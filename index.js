@@ -50,7 +50,9 @@ var thumb = slider.querySelector('.linePoint');
 var lineSum = 0;
 var newLeft = 0;
 
-thumb.addEventListener('mousedown', clickPoint);
+// thumb.addEventListener('mousedown', clickPoint);
+thumb.addEventListener('pointerdown', clickPoint);
+/*
 thumb.addEventListener('touchstart', xx);
 let shiftX;
 function xx(event) {
@@ -93,27 +95,31 @@ function xx(event) {
       document.removeEventListener('touchend', onMouseUp1);
    }
 }
-
+*/
 function clickPoint(event) {
 
+   thumb.setPointerCapture(event.pointerId);
    event.preventDefault();
 
    let bacgroundLine = document.querySelector('.bacgroundLine');
    let bacgroundLineWidth = bacgroundLine.offsetWidth;
    let lineOnePr = bacgroundLineWidth / 100;
    let wraperLineTextSpan = document.querySelector('.wraperLineTextSpan');
-
+   // alert(slider.getBoundingClientRect().left + '---' + event.clientX)
    let shiftX = event.clientX - thumb.getBoundingClientRect().left;
 
-   document.addEventListener('mousemove', onMouseMove);
-   document.addEventListener('mouseup', onMouseUp);
+   // document.addEventListener('mousemove', onMouseMove);
+   // document.addEventListener('mouseup', onMouseUp);
 
-   // document.addEventListener('touchmove', onMouseMove);
-   // document.addEventListener('touchend', onMouseUp);
+   thumb.addEventListener('pointermove', onMouseMove);
+   thumb.addEventListener('pointerup', onMouseUp);
+
+   // thumb.onpointermove = function (event) {
 
    function onMouseMove(event) {
 
-      newLeft = event.clientX - shiftX - slider.getBoundingClientRect().left;
+      // newLeft = event.clientX - shiftX - slider.getBoundingClientRect().left;
+      newLeft = event.clientX - slider.getBoundingClientRect().left - (thumb.offsetWidth / 2);
 
       if (newLeft < 0) {
          newLeft = 0;
@@ -126,17 +132,23 @@ function clickPoint(event) {
       thumb.style.left = newLeft + 'px';
 
       lineSum = newLeft / lineOnePr;
-      if (lineSum >= 0) {
-         wraperLineTextSpan.textContent = Math.floor(lineSum);
-      }
+      // if (lineSum >= 0) {
+      wraperLineTextSpan.textContent = Math.floor(lineSum);
+      // }
       map.style.scale = 1 + (Math.floor(lineSum) / 10);
       bacgroundLine.style.left = -(bacgroundLineWidth - newLeft) + 'px';
-   }
+   };
 
-   function onMouseUp() {
-      document.removeEventListener('mouseup', onMouseUp);
-      document.removeEventListener('mousemove', onMouseMove);
-   }
+   function onMouseUp(event) {
+      // thumb.onpointerup = function onMouseUp(event) {
+      // document.removeEventListener('mouseup', onMouseUp);
+      // document.removeEventListener('mousemove', onMouseMove);
+      thumb.removeEventListener('pointermove', onMouseMove);
+      thumb.removeEventListener('pointerup', onMouseUp);
+      thumb.onpointermove = null;
+      thumb.onpointerup = null;
+
+   };
 
    window.addEventListener('resize', () => {
       thumb.style.left = 0 + 'px';
@@ -198,3 +210,14 @@ document.querySelector('.form').addEventListener("click", function (e) {
       }
    }
 });
+// -----------------------------------------------------
+document.addEventListener('pointerdown', clickSeti);
+
+function clickSeti(e) {
+   e.target.style.scale = 1.5;
+
+   document.addEventListener('pointerdown', clickZoom);
+   function clickZoom(e) {
+      e.target.style.scale = 1;
+   };
+};

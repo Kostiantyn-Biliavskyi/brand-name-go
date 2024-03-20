@@ -459,7 +459,7 @@ a {
 /* ------------------Services----------------------------- */
 .wraperBlockTextFoto3 {
    margin: 0 auto;
-   max-width: 1296px;
+   max-width: 1440px;
    height: auto;
    margin-top: 100px;
 }
@@ -944,6 +944,7 @@ a {
    left: 0;
    top: -3px;
    background-color: #ffffff;
+   touch-action: none
 }
 
 @media screen and (max-width:500px) {

@@ -228,6 +228,7 @@ a {
 .wraperBlockTextFoto3 {
    margin: 0 auto;
    max-width: 1440px;
+   min-width: 300px;
    height: auto;
    margin-top: 50px;
 }
@@ -258,7 +259,6 @@ a {
    height: 416px;
    max-width: 416px;
    max-height: 416px;
-   /* min-width: 416px; */
    min-height: 416px;
    border-radius: 16px;
    position: relative;
@@ -308,6 +308,7 @@ a {
 /* ------------------------------------- */
 .wraperNavigation {
    max-width: 1290px;
+   min-width: 300px;
    height: auto;
    display: flex;
    align-items: center;
